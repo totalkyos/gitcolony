@@ -1,0 +1,2 @@
+# remote-rebase
+Git extension
