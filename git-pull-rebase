@@ -11,7 +11,7 @@ PREV_HEAD=""
 
 for x in $NOT_IN_REMOTE ; do
   case "$REFLOG" in 
-   *"$x"* ) PREV_HEAD="$x";;
+   *"$x"* ) PREV_HEAD="$x";break;;
   esac
 done
 
