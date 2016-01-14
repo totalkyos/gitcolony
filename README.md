@@ -1,4 +1,4 @@
-# remote-rebase
+# git pull-rebase
 Git extension
 
 
