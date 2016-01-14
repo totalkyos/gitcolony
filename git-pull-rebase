@@ -16,8 +16,7 @@ for x in $NOT_IN_REMOTE ; do
 done
 
 if [ ! -z "$PREV_HEAD" ]; then
-  git rebase --onto $REMOTE_BRANCH $PREV_HEAD HEAD
-  git checkout -B $BRANCH
+  git rebase --onto $REMOTE_BRANCH $PREV_HEAD HEAD && git checkout -B $BRANCH || echo "Fix conflicts then run git checkout -B $BRANCH"
 else
   git rebase
 fi
