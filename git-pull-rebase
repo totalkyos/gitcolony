@@ -1,0 +1,25 @@
+#!/bin/sh
+
+git fetch
+
+REMOTE_BRANCH=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+REFLOG=`git reflog $REMOTE_BRANCH | awk '{print $1}'`
+NOT_IN_REMOTE=$(git log $REMOTE_BRANCH.. --format="%h" | tr "\n" " ")
+PREV_HEAD=""
+
+
+for x in $NOT_IN_REMOTE ; do
+  case "$REFLOG" in 
+   *"$x"* ) PREV_HEAD="$x";;
+  esac
+done
+
+if [ ! -z "$PREV_HEAD" ]; then
+  git rebase --onto $REMOTE_BRANCH $PREV_HEAD HEAD
+  git checkout -B $BRANCH
+else
+  git rebase
+fi
+
+
